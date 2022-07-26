@@ -19,7 +19,7 @@ type ssService gsheets.Service
 func NewSpreadSheetService(ctx context.Context, client *http.Client) (SpreadSheetService, error) {
 	sheetsService, err := gsheets.NewService(ctx, option.WithHTTPClient(client))
 	if err != nil {
-		return nil, fmt.Errorf("GoogleDriveとの接続に失敗しました: %v", err.Error())
+		return nil, fmt.Errorf("Googleとの接続に失敗しました: %v", err.Error())
 	}
 	svc := ssService(*sheetsService)
 	return &svc, nil

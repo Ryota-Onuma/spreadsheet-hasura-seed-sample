@@ -11,24 +11,25 @@ import (
 )
 
 func NewClient(ctx context.Context) (*http.Client, error) {
+	// gcpからダウンロードしたJSON keyのパスを設定する
 	const gcsAuthJSONFilePath = "/go/src/google/gcpClientSecret.json"
 	b, err := os.ReadFile(gcsAuthJSONFilePath)
 	if err != nil {
-		return nil, fmt.Errorf("googleとの接続に失敗しました: %v", err.Error())
+		return nil, fmt.Errorf("Googleとの接続に失敗しました: %v", err.Error())
 	}
 	config, err := google.ConfigFromJSON(b, "https://www.googleapis.com/auth/spreadsheets.readonly")
 	if err != nil {
-		return nil, fmt.Errorf("googleとの接続に失敗しました: %v", err.Error())
+		return nil, fmt.Errorf("Googleとの接続に失敗しました: %v", err.Error())
 	}
 
 	token, err := getTokenFromWeb(config)
 	if err != nil {
-		return nil, fmt.Errorf("GoogleDriveとの接続に失敗しました: %v", err.Error())
+		return nil, fmt.Errorf("Googleとの接続に失敗しました: %v", err.Error())
 	}
 
 	client := config.Client(context.Background(), token)
 	if err != nil {
-		return nil, fmt.Errorf("GoogleDriveとの接続に失敗しました: %v", err.Error())
+		return nil, fmt.Errorf("Googleとの接続に失敗しました: %v", err.Error())
 	}
 	return client, nil
 }
