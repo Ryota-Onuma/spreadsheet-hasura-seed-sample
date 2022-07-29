@@ -94,7 +94,7 @@ func (c *UpsertContentData) RegisterContentMap(tableName string, records [][]str
 		var texts []string
 		for _, v := range record {
 			if v == "" {
-				texts = append(texts, "{{ null }}")
+				texts = append(texts, "null")
 			} else {
 				texts = append(texts, v)
 			}
